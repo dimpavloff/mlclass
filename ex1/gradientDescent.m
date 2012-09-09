@@ -17,13 +17,16 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+    %instead of getting having to transpose twice like the commented out
+    %switched the multiplication position of X and the X*theta - y
+    %and hence only one transpose is done
+    %derivative = (1/m) * (X*theta - y)'*X;
+    %theta = theta - alpha * derivative';
 
+    pderiv = (1/m) * X'*(X*theta -y);
 
-
-
-
-
-    % ============================================================
+    theta = theta - alpha * pderiv;
+       % ============================================================
 
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
