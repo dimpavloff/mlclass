@@ -18,9 +18,12 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-
-
-
+ht = sigmoid(X*theta);
+reg = lambda/(2*m)*sum(theta(2:end).^2);
+J = (1/m * sum(-y.*log(ht) - (1-y).*log(1-ht))) + reg;
+grad = 1/m * X'*(ht-y);
+% theta(1) should not be regulized;
+grad = [grad(1); grad(2:end)+theta(2:end).*lambda/m];
 
 % =============================================================
 
