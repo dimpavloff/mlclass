@@ -20,17 +20,23 @@ p = zeros(size(X, 1), 1);
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
-for example = 1:m
-    a1 = [ 1 X(example,:) ];
-    z2 = Theta1 * a1';
-    a2 = [ 1 ; sigmoid(z2) ];
-    z3 = Theta2 * a2;
-    a3 = sigmoid(z3);
-    [v, p(example)] = max(a3);
-end
 
+%for example = 1:m
+%    a1 = [ 1 X(example,:) ];
+%    z2 = Theta1 * a1';
+%    a2 = [ 1 ; sigmoid(z2) ];
+%    z3 = Theta2 * a2;
+%    a3 = sigmoid(z3);
+%    [v, p(example)] = max(a3);
+%end
 
-
+% Vectorized implementation - # of units == # of columns
+all_a1 = [ ones(m,1) X ];
+all_z2 = all_a1 * Theta1'; % size(m,#units in a2)
+all_a2 = [ ones(m,1) sigmoid(all_z2) ];
+all_z3 = all_a2 * Theta2';
+all_a3 = sigmoid(all_z3);
+[v, p] = max(all_a3,[],2);
 
 
 
