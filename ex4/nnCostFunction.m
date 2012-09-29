@@ -62,16 +62,35 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+all_a1 = [ones(m,1) X];
+all_z2 = all_a1 * Theta1';
+all_a2 = [ones(m,1) sigmoid(all_z2)];
+all_z3 = all_a2 * Theta2';
+all_a3 = sigmoid(all_z3);
+
+Y = zeros(m,num_labels);
+for i = 1:m
+    Y(i,y(i))=1;
+end
+
+%element-wise multiplication - both Y and all_a3 are 5000x10
+J = 1/m * sum(sum(-Y.*log(all_a3) - (1-Y).*log(1 - all_a3)));
+
+reg = lambda/(2*m) * ...
+    (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2)));
+
+J = J + reg;
 
 
 
+d3 = all_a3 - Y;
+d2 = d3 * Theta2(:,2:end) .* sigmoidGradient(all_z2); 
+Theta2_grad = d3' * all_a2/m;
+Theta1_grad = d2' * all_a1/m;
 
-
-
-
-
-
-
+%regularize
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda/m * Theta2(:,2:end);
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda/m * Theta1(:,2:end);
 
 
 
