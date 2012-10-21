@@ -21,7 +21,10 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for i = 1:size(X,1)
+    C = sum((repmat(X(i,:),K,1) - centroids).^2,2);
+    [val idx(i)] = min(C);
+end
 
 
 
