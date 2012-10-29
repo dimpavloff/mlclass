@@ -23,7 +23,8 @@ sigma2 = zeros(n, 1);
 
 
 
-
+mu = mean(X);
+sigma2 = var(X,1);%normalize with 1/m not 1/m-1
 
 
 
