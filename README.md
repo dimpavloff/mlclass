@@ -1,5 +1,6 @@
 #Description
 These are the solutions to the programming exercises of Andrew Ng's machine learning course on https://www.coursera.org/course/ml
+The description of and hints for the exercises can be found in the pdf files in each folder.
 
 Please respect the class's Honor Code (below) and refer to LICENSE.txt if you want to use the source code in this repository.
 
